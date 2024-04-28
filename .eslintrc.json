@@ -15,10 +15,7 @@
   "globals": {
     "react": "readonly"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -29,11 +26,7 @@
     "no-console": [
       "error",
       {
-        "allow": [
-          "warn",
-          "error",
-          "info"
-        ]
+        "allow": ["warn", "error", "info"]
       }
     ],
     "@typescript-eslint/no-use-before-define": [
@@ -51,9 +44,7 @@
     "camelcase": [
       "error",
       {
-        "allow": [
-          "League_Spartan"
-        ]
+        "allow": ["League_Spartan"]
       }
     ],
     "import/extensions": 0,
