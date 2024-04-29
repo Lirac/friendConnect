@@ -2,9 +2,10 @@ import React from "react";
 import NotificationCard from "@/components/modules/dashboard/NotificationCard";
 import FriendsList from "@/components/modules/dashboard/FriendsList";
 import FriendRequest from "@/components/modules/dashboard/FriendRequest";
-import StatusCard from "@/components/modules/dashboard/StatusCard";
+import StatusUpdate from "@/components/modules/dashboard/StatusUpdate";
 import Connect from "@/components/modules/dashboard/Connect";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import TimelineCard from "@/components/modules/dashboard/TimelineCard";
 
 const notifications = [
   {
@@ -68,8 +69,9 @@ const DashboardPage = (): React.JSX.Element => {
       <div>
         <NotificationCard notifications={notifications} />
       </div>
-      <div>
-        <StatusCard />
+      <div className="space-y-3">
+        <StatusUpdate />
+        <TimelineCard name="Mfoniso" time={20} />
       </div>
       <ScrollArea className="h-[600px] pb-6">
         <div className="space-y-3">

@@ -10,7 +10,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-const StatusCard = (): React.JSX.Element => {
+const StatusUpdate = (): React.JSX.Element => {
   return (
     <Card>
       <CardHeader>
@@ -29,4 +29,4 @@ const StatusCard = (): React.JSX.Element => {
   );
 };
 
-export default StatusCard;
+export default StatusUpdate;
