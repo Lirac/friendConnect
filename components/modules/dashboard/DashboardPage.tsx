@@ -3,6 +3,8 @@ import NotificationCard from "@/components/modules/dashboard/NotificationCard";
 import FriendsList from "@/components/modules/dashboard/FriendsList";
 import FriendRequest from "@/components/modules/dashboard/FriendRequest";
 import StatusCard from "@/components/modules/dashboard/StatusCard";
+import Connect from "@/components/modules/dashboard/Connect";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const notifications = [
   {
@@ -47,6 +49,19 @@ const friendRequest = [
     connections: 2,
   },
 ];
+
+const connects = [
+  {
+    name: "Jude Browson",
+    userId: "12234",
+    mutual: 20,
+  },
+  {
+    name: "David Orstien",
+    userId: "12234",
+    mutual: 23,
+  },
+];
 const DashboardPage = (): React.JSX.Element => {
   return (
     <div className="grid grid-cols-[1fr_2fr_1fr] gap-2.5">
@@ -56,10 +71,13 @@ const DashboardPage = (): React.JSX.Element => {
       <div>
         <StatusCard />
       </div>
-      <div className="space-y-3">
-        <FriendsList friends={friends} />
-        <FriendRequest requests={friendRequest} />
-      </div>
+      <ScrollArea className="h-[600px] pb-6">
+        <div className="space-y-3">
+          <FriendsList friends={friends} />
+          <FriendRequest requests={friendRequest} />
+          <Connect connections={connects} />
+        </div>
+      </ScrollArea>
     </div>
   );
 };
