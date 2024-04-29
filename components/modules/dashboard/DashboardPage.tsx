@@ -1,15 +1,8 @@
 import React from "react";
 import NotificationCard from "@/components/modules/dashboard/NotificationCard";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import FriendsList from "@/components/modules/dashboard/FriendsList";
+import FriendRequest from "@/components/modules/dashboard/FriendRequest";
+import StatusCard from "@/components/modules/dashboard/StatusCard";
 
 const notifications = [
   {
@@ -25,6 +18,35 @@ const notifications = [
     description: "2 hours ago",
   },
 ];
+
+const friends = [
+  {
+    name: "James David",
+    active: 20,
+  },
+  {
+    name: "Bush Donald",
+    active: 30,
+  },
+
+  {
+    name: "Michael Brooks",
+    active: 2,
+  },
+];
+
+const friendRequest = [
+  {
+    name: "John Browson",
+    userId: "12234",
+    connections: 10,
+  },
+  {
+    name: "David Orstien",
+    userId: "12234",
+    connections: 2,
+  },
+];
 const DashboardPage = (): React.JSX.Element => {
   return (
     <div className="grid grid-cols-[1fr_2fr_1fr] gap-2.5">
@@ -32,24 +54,12 @@ const DashboardPage = (): React.JSX.Element => {
         <NotificationCard notifications={notifications} />
       </div>
       <div>
-        <Card>
-          <CardHeader>
-            <CardTitle>Update status</CardTitle>
-            <CardDescription>
-              Let your friends know {"what's"} happening around you.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form>
-              <Textarea placeholder="Type your message here." />
-            </form>
-          </CardContent>
-          <CardFooter className="border-t px-6 py-4">
-            <Button>Post</Button>
-          </CardFooter>
-        </Card>
+        <StatusCard />
       </div>
-      <div>Div3</div>
+      <div className="space-y-3">
+        <FriendsList friends={friends} />
+        <FriendRequest requests={friendRequest} />
+      </div>
     </div>
   );
 };
