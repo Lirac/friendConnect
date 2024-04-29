@@ -2,6 +2,7 @@
 
 import * as React from "react";
 
+import { useRouter } from "next/navigation";
 import cn from "@/lib/utils";
 import Icons from "@/components/modules/common/Icons";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const LoginForm = ({ className, ...props }: UserAuthFormProps): React.JSX.Element => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const router = useRouter();
 
   async function onSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault();
@@ -19,6 +21,7 @@ const LoginForm = ({ className, ...props }: UserAuthFormProps): React.JSX.Elemen
 
     setTimeout(() => {
       setIsLoading(false);
+      router.replace("/dashboard");
     }, 3000);
   }
 
@@ -40,7 +43,7 @@ const LoginForm = ({ className, ...props }: UserAuthFormProps): React.JSX.Elemen
               disabled={isLoading}
             />
           </div>
-          <Button disabled={isLoading}>
+          <Button disabled={isLoading} type="submit">
             {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
             Login with Email
           </Button>

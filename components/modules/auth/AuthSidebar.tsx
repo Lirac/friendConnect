@@ -7,7 +7,7 @@ const BaseSidebar = ({ children }: { children?: React.ReactNode }): React.JSX.El
         <p className="text-[32px] font-medium leading-[110%]">
           Build Friendships and Increase Your Reach.
         </p>
-        <p className="text-[18px] font-[400px] leading-[22.5px] text-muted">
+        <p className="text-[18px] font-[400px] leading-[22.5px] text-muted-foreground">
           Super Charge Your Friend Zone, Unlock the Power of your Circle.
         </p>
         {children}
