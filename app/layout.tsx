@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
 import React from "react";
+import Providers from "@/app/provider";
 
 const league = League_Spartan({ subsets: ["latin"] });
 
@@ -17,7 +18,9 @@ export default function RootLayout({
 }>): React.JSX.Element {
   return (
     <html lang="en">
-      <body className={league.className}>{children}</body>
+      <body className={league.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
