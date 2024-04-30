@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String         @id @default(auto()) @map("_id") @db.ObjectId
+  username         String         @unique
+  email            String         @unique
+  password         String
+  posts            Post[]
+  sentRequests     Request[]      @relation("SentRequests")
+  receivedRequests Request[]      @relation("ReceivedRequests")
+  notifications    Notification[]
+  userAccount      Friend[]       @relation("accounts")
+  friendAccount    Friend[]       @relation("friendAccount")
+}
+
+model Post {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  content       String
+  author        User           @relation(fields: [authorId], references: [id])
+  authorId      String         @db.ObjectId
+  createdAt     DateTime       @default(now())
+  notifications Notification[]
+}
+
+model Request {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  sender     User   @relation("SentRequests", fields: [senderId], references: [id])
+  senderId   String @db.ObjectId
+  receiver   User   @relation("ReceivedRequests", fields: [receiverId], references: [id])
+  receiverId String @db.ObjectId
+  status     Status @default(PENDING) // Status can be pending, accepted, or rejected
+}
+
+model Friend {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  useraccount     User   @relation("accounts", fields: [userAccountId], references: [id])
+  userAccountId   String @db.ObjectId
+  friendAccount   User   @relation("friendAccount", fields: [friendAccountId], references: [id])
+  friendAccountId String @db.ObjectId
+}
+
+model Notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  post      Post?    @relation(fields: [postId], references: [id])
+  postId    String?  @db.ObjectId
+  createdAt DateTime @default(now())
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+}
