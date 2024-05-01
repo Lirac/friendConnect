@@ -22,7 +22,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Environment variables
 
-Add DATABASE_URL="mongodb+srv://liraclomex:Lirac@cluster0.lodis4f.mongodb.net/friendConnect?retryWrites=true"
+Add DATABASE_URL="<URL>"
 
 ## API
 ```
