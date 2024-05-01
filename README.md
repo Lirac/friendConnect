@@ -23,3 +23,16 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## Environment variables
 
 Add DATABASE_URL="mongodb+srv://liraclomex:Lirac@cluster0.lodis4f.mongodb.net/friendConnect?retryWrites=true"
+
+## API
+create new user --- https://localhost:3000/register
+Login user --- https://localhost:3000/login
+post status --- https://localhost:3000/post
+Get status --- https://localhost:3000/post
+
+## TOOLS
+UI library --- shadcn
+CSS library --- tailwind
+React framework --- Nextjs
+State management --- Redux toolkit and Redux toolkit query
+Persistence --- Redux persist
