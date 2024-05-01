@@ -5,8 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 type timelineProps = {
   name: string;
   time: number;
+  content: string;
 };
-const TimelineCard = ({ name, time }: timelineProps): React.JSX.Element => {
+const TimelineCard = ({ name, time, content }: timelineProps): React.JSX.Element => {
   return (
     <Card className="w-full">
       <CardContent className="grid gap-4">
@@ -21,7 +22,7 @@ const TimelineCard = ({ name, time }: timelineProps): React.JSX.Element => {
           </div>
         </div>
         <div>
-          <p>This is a test status</p>
+          <p>{content}</p>
         </div>
       </CardContent>
     </Card>

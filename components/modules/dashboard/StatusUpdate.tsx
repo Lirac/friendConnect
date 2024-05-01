@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Card,
   CardContent,
@@ -12,22 +12,19 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { AppDispatch, RootState } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import Icons from "@/components/modules/common/Icons";
-import { createPost } from "@/redux/post/postSlice";
+import { useCreatePostMutation } from "@/redux/apiSlice";
 
 const StatusUpdate = (): React.JSX.Element => {
   const user = useSelector((state: RootState) => state.user.user);
-  const postStatus = useSelector((state: RootState) => state.post.postStatus);
   const [content, setContent] = useState("");
-  const buttonDisabled = postStatus === "pending" || content === "";
-  const dispatch = useDispatch<AppDispatch>();
+  const [createPost, { isLoading }] = useCreatePostMutation();
+  const buttonDisabled = isLoading || content === "";
   const handleSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.preventDefault();
     const authorId = user?.id || "";
-    dispatch(createPost({ content, authorId })).then(() => {
-      setContent("");
-    });
+    createPost({ content, authorId }).then(() => setContent(""));
   };
   return (
     <form>
@@ -46,7 +43,7 @@ const StatusUpdate = (): React.JSX.Element => {
         <CardContent></CardContent>
         <CardFooter className="border-t px-6 py-4">
           <Button disabled={buttonDisabled} type={"button"} onClick={handleSave}>
-            {postStatus === "pending" && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+            {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
             Post
           </Button>
         </CardFooter>

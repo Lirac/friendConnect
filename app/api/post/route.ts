@@ -17,6 +17,10 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 export async function GET(): Promise<Response> {
-  const posts = await client.post.findMany();
+  const posts = await client.post.findMany({
+    include: {
+      author: true,
+    },
+  });
   return NextResponse.json(posts);
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
 import React from "react";
 import Providers from "@/app/provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const league = League_Spartan({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={league.className}>
         <Providers>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import NotificationCard from "@/components/modules/dashboard/NotificationCard";
 import FriendsList from "@/components/modules/dashboard/FriendsList";
@@ -6,6 +8,8 @@ import StatusUpdate from "@/components/modules/dashboard/StatusUpdate";
 import Connect from "@/components/modules/dashboard/Connect";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import TimelineCard from "@/components/modules/dashboard/TimelineCard";
+import { useGetPostsQuery } from "@/redux/apiSlice";
+import { PostType } from "@/models/Post";
 
 const notifications = [
   {
@@ -64,16 +68,28 @@ const connects = [
   },
 ];
 const DashboardPage = (): React.JSX.Element => {
+  const { data, isLoading } = useGetPostsQuery({ pollingInterval: 3000 });
   return (
-    <div className="grid grid-cols-[1fr_2fr_1fr] gap-2.5">
+    <div className="grid grid-cols-[1fr_2fr_1fr] gap-2.5 relative">
       <div>
         <NotificationCard notifications={notifications} />
       </div>
       <div className="space-y-3">
         <StatusUpdate />
-        <TimelineCard name="Mfoniso" time={20} />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          data?.map((post: PostType) => (
+            <TimelineCard
+              key={post.id}
+              name={post.author.username}
+              content={post.content}
+              time={new Date(post.createdAt).getMinutes()}
+            />
+          ))
+        )}
       </div>
-      <ScrollArea className="h-[600px] pb-6">
+      <ScrollArea className="h-[600px] pb-6 sticky top-0">
         <div className="space-y-3">
           <FriendsList friends={friends} />
           <FriendRequest requests={friendRequest} />
